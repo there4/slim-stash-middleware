@@ -1,0 +1,20 @@
+{
+    "name": "there4/slim-stash-middleware",
+    "description": "Slim Stash Cache Middleware",
+    "require": {
+        "tedivm/stash": "0.12.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Craig Davis",
+            "email": "craig@there4development.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "There4": "lib/"
+        }
+    },
+    "minimum-stability": "dev"
+}
