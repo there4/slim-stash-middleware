@@ -17,6 +17,7 @@ class StashCache extends \Slim\Middleware
         // Only cache GET requests
         if (!$this->app->request->isGet()) {
             $this->next->call();
+            return;
         }
 
         // TODO: Allow this signature generator to be a callback
