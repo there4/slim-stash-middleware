@@ -43,6 +43,7 @@ $app->get('/', function () use ($app) {
     $app->response->cacheExpiration = 3600;
     $app->render('index.html');
 });
+```
 
 ## TODO
 
