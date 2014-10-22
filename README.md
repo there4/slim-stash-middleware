@@ -47,6 +47,7 @@ $app->get('/', function () use ($app) {
 
 ## TODO
 
+* Add cache signature key generator callback option
 * Cache warming script
 * Tests
 * Improved documentation
