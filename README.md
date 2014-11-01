@@ -43,12 +43,27 @@ $app->get('/', function () use ($app) {
     $app->response->cacheExpiration = 3600;
     $app->render('index.html');
 });
+
+// User Profile Page
+// -----------------------------------------------------------------------------
+// This would need to be coupled with a cache invalidation on a user change
+$app->get('/profile', function () use ($app) {
+    $user = $app->currentUser;
+    $app->response->allowCache = true;
+    $app->response->cacheExpiration = 3600;
+    $app->response->signature = 'userProfile' . $user->id;
+    $app->render('index.html');
+});
 ```
+
+## Quick API Reference
+
+* __$app->response->allowCache__ `bool` enable caching
+* __$app->response->cacheExpiration__ `int` seconds to hold data in cache;
+* __$app->response->signature__ `mixed` leave unset for automatic url based. String for simple signature. Callback function will be executed. Array in `call_user_func` format is acceptable as well.
+
 
 ## TODO
 
-* Add cache signature key generator callback option
 * Cache warming script
 * Tests
-* Improved documentation
-* Packagist publication

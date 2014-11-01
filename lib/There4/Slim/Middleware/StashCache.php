@@ -20,11 +20,17 @@ class StashCache extends \Slim\Middleware
             return;
         }
 
-        // TODO: Allow this signature generator to be a callback
-        $key = $req->getResourceUri();
-
-        // Get via the key if it's not a miss send it to the client
-        $stashItem = $stash->getItem('routes' . $key);
+        // Allow a callback, call_user_func allows an array to be passed
+        if (isset($resp->signature)) {
+            $signature = is_callable($resp->signature)
+                ? call_user_func($resp->signature)
+                : $resp->signature;
+        } else {
+            $signature = $req->getResourceUri();
+        }
+        // Get via the signature if it's not a miss send it to the client
+        // and return to halt the response chain
+        $stashItem = $stash->getItem('routes' . $signature);
         $data = $stashItem->get(\Stash\Item::SP_PRECOMPUTE, 300);
         if (!$stashItem->isMiss()) {
             $this->app->lastModified($data['last_modified']);
@@ -32,8 +38,8 @@ class StashCache extends \Slim\Middleware
             $resp->body($data['body']);
             return;
         }
-
-        // Run the next middleware layer
+        // Else we continue on with the middleware change and run the next
+        // middleware layer
         $this->next->call();
 
         // If we allow cache and the endpoint ran correctly, cache the result
