@@ -13,6 +13,7 @@ Here is an example of the middleware setup. It's using a config setting to
 enable the cache.
 
 ```php
+<?php
 // Stash Page Cache Middleware
 // -----------------------------------------------------------------------------
 // A generalized way of caching the output of an endpoint
@@ -34,7 +35,7 @@ if ($app->config('enable_cache')) {
 And an endpoint that uses the cache:
 
 ```php
-
+<?php
 // Root of the site
 // -----------------------------------------------------------------------------
 // Simple index page - no data
