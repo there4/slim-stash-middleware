@@ -1,4 +1,4 @@
-Slim Stash Cache Middleware
+Slim Stash Cache Middleware [![Build Status](https://travis-ci.org/there4/slim-stash-middleware.svg)](https://travis-ci.org/there4/slim-stash-middleware)
 ================================================================================
 > Caching middleware layer for Slim using Stash
 

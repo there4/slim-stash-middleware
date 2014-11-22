@@ -1,9 +1,9 @@
 {
     "name": "there4/slim-stash-middleware",
     "description": "Slim Stash Cache Middleware",
-    "require": {
-        "tedivm/stash": "0.12.*"
-    },
+    "keywords": ["slim", "cache", "caching"],
+    "homepage": "https://github.com/there4/slim-stash-middleware",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -11,10 +11,31 @@
             "email": "craig@there4development.com"
         }
     ],
+    "support": {
+        "issues": "https://github.com/there4/slim-stash-middleware/issues",
+        "source": "https://github.com/there4/slim-stash-middleware"
+    },
     "autoload": {
         "psr-0": {
             "There4": "lib/"
         }
     },
-    "minimum-stability": "dev"
+    "autoload-dev": {
+        "psr-0": {
+            "There4Test": "tests/"
+        }
+    },
+    "require": {
+        "tedivm/stash": "0.12.*"
+    },
+    "require-dev": {
+        "slim/slim": "2.4.*",
+        "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "1.*"
+    },
+    "minimum-stability": "dev",
+    "scripts": {
+        "test" : "vendor/bin/phpunit --verbose --coverage-text",
+        "sniff" : "vendor/bin/phpcs --standard=PSR2 --extensions=php lib tests"
+    }
 }

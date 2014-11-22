@@ -1,9 +1,11 @@
 <?php
 namespace There4\Slim\Middleware;
 
+use \Stash\Pool;
+
 class StashCache extends \Slim\Middleware
 {
-    public function __construct($stash)
+    public function __construct(Pool $stash)
     {
         $this->stash = $stash;
     }
@@ -28,11 +30,12 @@ class StashCache extends \Slim\Middleware
         } else {
             $signature = $req->getResourceUri();
         }
+
         // Get via the signature if it's not a miss send it to the client
         // and return to halt the response chain
         $stashItem = $stash->getItem('routes' . $signature);
-        $data = $stashItem->get(\Stash\Item::SP_PRECOMPUTE, 300);
         if (!$stashItem->isMiss()) {
+            $data = $stashItem->get(\Stash\Item::SP_PRECOMPUTE, 300);
             $this->app->lastModified($data['last_modified']);
             $resp['Content-Type'] = $data['content_type'];
             $resp->body($data['body']);
